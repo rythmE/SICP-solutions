@@ -1,0 +1,12 @@
+(define (rand order)
+  (define generate
+		(lambda ()
+		  ;(set! x (rand-update x))
+		  (set! x (random 1000))
+		  x))
+  (define (reset value)
+    (set! x value)
+	x)
+  (cond ((eq? order 'generate) (generate))
+		((eq? order 'reset) reset)
+		(else (erro "Unknown request -- RAND" order))))

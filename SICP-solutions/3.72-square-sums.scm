@@ -1,0 +1,17 @@
+(load "3.70-merge-weighted.scm")
+ 
+(define square-in-3 
+	(define (square-sum pair)
+		(let ((i (car pair))
+					(j (cadr pair)))
+			(+ (square i) (square j))))
+	(define (stream-filter-3 weight stream)
+		(let ((x (stream-car stream))
+					(y (stream-car (stream-cdr stream)))
+					(z (stream-car (stream-cdr (stream-cdr stream))))
+			(cond ((stream-null? stream) the-empty-stream)
+						(= (weight x) (weight y) (weight z))
+							(cons-stream x (stream-filter-3 weight (stream-cdr stream))))
+						(else (stream-filter-3 weight (stream-cdr stream))))))
+	(let ((sq-sums-pairs (weighted-pairs integers integers square-sum)))
+		(stream-filter-3 square-sum q-sums-pairs)))

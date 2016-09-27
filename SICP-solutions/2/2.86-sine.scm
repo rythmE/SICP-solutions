@@ -1,0 +1,7 @@
+(define (sine n)
+  (if (number? n) 
+	  (sin n)
+	  (let ((type (type-tag n)))
+	    (if (eq? type 'scheme-number) 
+			(sin (contents n))
+			(sin (contents (type->scheme-number n)))))))

@@ -1,0 +1,20 @@
+(load "huffman.scm")
+(load "decode.scm")
+(load "2.67-sample-decode.scm")
+
+(define (has? x set)
+  (cond ((null? set) false)
+		((eq? x (car set)) true)
+		(else (has? x (cdr set)))))
+  
+(define (encode-symbol x tree)
+  (cond ((not (has? x (symbols tree))) (error "bad char -- MESSAGE" x))
+		((leaf? tree) '())
+		((has? x (symbols (left-branch tree))) (cons 0 (encode-symbol x (left-branch tree))))
+		((has? x (symbols (right-branch tree))) (cons 1 (encode-symbol x (right-branch tree))))))
+		
+(define (encode message tree)
+  (if (null? message)
+	  '()
+	  (append (encode-symbol (car message) tree)
+			  (encode (cdr message) tree))))

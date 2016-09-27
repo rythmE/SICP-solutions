@@ -1,0 +1,5 @@
+(define (lookup g-key records)
+  (cond ((null? records) false)
+		((= g-key (key (car records))) (car records))
+		((< g-key (key (car records))) (lookup g-key (cadr records)))
+		((> g-key (key (car records))) (lookup g-key (caddr records)))))

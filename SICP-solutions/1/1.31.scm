@@ -1,0 +1,15 @@
+(load "product.scm")
+
+(define (pi n)
+	(define (sq a) (* a a))
+	(define (p2 x) (+ x 2))
+	(if (even? n)
+		(* 8.0 (/ (/ (product sq 4 p2 n) n ) (product sq 3 p2 (- n 1))))
+		(* 8.0 (/ (/ (product sq 4 p2 (+ n 1)) (+ n 1) ) (product sq 3 p2 n)))))
+
+(define (pi-i n)
+	(define (sq a) (* a a))
+	(define (p2 x) (+ x 2))
+	(if (even? n)
+		(* 8.0 (/ (/ (product-i sq 4 p2 n) n ) (product sq 3 p2 (- n 1))))
+		(* 8.0 (/ (/ (product-i sq 4 p2 (+ n 1)) (+ n 1) ) (product sq 3 p2 n)))))

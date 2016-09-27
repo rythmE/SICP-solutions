@@ -1,0 +1,11 @@
+(load "constraint-interface.scm")
+(load "adder-mul-const.scm")
+(load "make-connector.scm")
+
+(define (average a b c)
+	(let ((s (make-connector))
+				(k (make-connector)))
+		(adder a b s)
+		(multiplier k s c)
+		(constant 0.5 k))
+		'ok)

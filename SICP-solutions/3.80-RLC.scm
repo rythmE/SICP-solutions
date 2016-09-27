@@ -1,0 +1,11 @@
+(load "integral-delayed.scm")
+
+(define (RLC R L C dt)
+	(define (vcil vc0 il0)
+		(define il (integral (delay dil) il0 dt))
+		(define vc (integral (delay dvc) vc0 dt))
+		(define dvc (scale-stream il (- (/ 1 C))))
+		(define dil (add-streams (scale-stream vc (/ 1 L))
+														 (scale-stream il (- (/ R L)))))
+		(cons vc il))
+	vcil)
